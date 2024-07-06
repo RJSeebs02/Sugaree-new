@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `user_email` varchar(180) NOT NULL default '',
   `user_password` varchar(180) NOT NULL default '',
   `user_status` varchar(180) NOT NULL default '',
-  `user_image` varchar(180) NOT NULL default '',  
+  `user_image` varchar(180) NOT NULL default '',
+  `user_role` varchar(180) NOT NULL default '', 
   PRIMARY KEY  (`user_id`)
 );
 

@@ -24,6 +24,7 @@ $user_lastname = $user->get_user_lname($user_id);
 $user_review = $user->get_user_review($user_id);
 $user_rating = $user->get_user_rating($user_id);
 $user_status = $user->get_user_status($user_id);
+$user_role = $user->get_user_role($user_id);
 
 /* Process form submission 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -125,15 +126,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $res = mysqli_query($con, "SELECT user_image FROM tbl_users WHERE user_id=$user_id");
                     while($row = mysqli_fetch_assoc($res)) {
                         $file_path = 'img/' . $row['user_image'];
-                        if (file_exists($file_path)) {
-                    ?>
-                        <img src="<?php echo $file_path ?>" alt="Uploaded Image" />
-                    <?php
-                        } else {
-                            echo "<p>Image not found: " . htmlspecialchars($file_path) . "</p>";
-                        }
+                        $alt_image = 'img/rom.jpg';
+
+                            // Check if the main image exists
+                            if (file_exists($file_path)) {
+                                // If the main image exists, use its alt text
+                                $alt_text = 'Uploaded Image';
+                            } else {
+                                // If the main image doesn't exist, use the alternative image name
+                                $alt_text = $alt_image;
+                            }
                     }
                     ?>
+                        <img src="<?php echo $file_path ?>" alt="<?php echo htmlspecialchars($alt_image); ?>" />
                 </div>
                 <input type="file" name="image" required />
                 <button type="submit" name="submit">Submit</button>
